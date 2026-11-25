@@ -1,6 +1,6 @@
 // Caches only the app itself so it opens instantly. Manga pages are never
 // cached here; they stream from Google Drive.
-const CACHE = 'manga-reader-v1';
+const CACHE = 'manga-reader-v2';
 const SHELL = [
   './', 'index.html', 'config.js', 'manifest.webmanifest', 'css/app.css',
   'js/app.js', 'js/auth.js', 'js/drive.js', 'js/library.js', 'js/reader.js', 'js/store.js', 'js/zip.js',
