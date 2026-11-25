@@ -1,6 +1,6 @@
 // Caches only the app itself so it opens instantly. Manga pages are never
 // cached here; they stream from Google Drive.
-const CACHE = 'manga-reader-v2';
+const CACHE = 'manga-reader-v3';
 const SHELL = [
   './', 'index.html', 'config.js', 'manifest.webmanifest', 'css/app.css',
   'js/app.js', 'js/auth.js', 'js/drive.js', 'js/library.js', 'js/reader.js', 'js/store.js', 'js/zip.js',
@@ -18,7 +18,7 @@ self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET' || url.origin !== location.origin) return;
   // Network first, so updates show up; fall back to cache when offline.
   e.respondWith(
-    fetch(e.request).then((r) => {
+    fetch(e.request, { cache: 'no-cache' }).then((r) => {
       if (r.ok) { const copy = r.clone(); caches.open(CACHE).then((c) => c.put(e.request, copy)); }
       return r;
     }).catch(() => caches.match(e.request, { ignoreSearch: true }).then((r) => r || caches.match('index.html')))
